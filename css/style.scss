@@ -1,0 +1,829 @@
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&family=Teko:wght@400;500;600;700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap'); 
+
+html, body
+{
+    margin: 0;
+    padding :0;    
+    font-family: "roboto";
+    font-size: 1rem;
+}
+
+p
+{
+    font-size: 1em;
+    color: #666666;
+    line-height: 1.5em;
+}
+h1, h2, h3, h4, h5, h6, p{margin: 0; padding: 0;}
+
+$breakpoints: (sm: (min: 300px,
+        max: 576px,
+    ),
+    md: (min: 768px,
+        max: 767.98px),
+    lg: (min: 992px,
+        max: 991.98px),
+    xl: (min: 1200px,
+        max: 1199.98px),
+    xxl: (min: 1400px,
+        max: 1399.98px,
+    ));
+
+
+@mixin breakpoint($breakpoint, $direction: min) {
+
+    //check if the supplied breakpoint exists in our breakpoits map
+    @if map-has-key($breakpoints, $breakpoint) {
+        $breakpoint-values: map-get($breakpoints, $breakpoint);
+        $breakpoint-min: map-get($breakpoint-values, min);
+        $breakpoint-max: map-get($breakpoint-values, max);
+
+        //check if we are writing styles for larger or smaller screens
+        @if $direction==min {
+            @media (min-width: $breakpoint-min) {
+                @content;
+            }
+        }
+
+        @else {
+            @media (max-width: $breakpoint-max) {
+                @content;
+            }
+        }
+
+        // use the custom value if the breakpoint is not part of the pre-defined list
+    }
+
+    @else {
+
+        @if $direction==min {
+            @media (min-width: $breakpoint) {
+                @content;
+            }
+        }
+
+        @else {
+            @media (max-width: $breakpoint) {
+                @content;
+            }
+        }
+    }
+}
+
+
+/* colors */
+
+$darkgreen : #223F3A;
+$teal : #D6A57D;
+$lightgreen : #DCE1E0;
+$lightteal:#F2E5DA;
+$white : #fff;
+
+
+h1{font-family: "teko";}
+h3{font-style: italic; font-weight: lighter;}
+
+.main
+{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+header
+{
+    background:$darkgreen;
+    padding: 20px 0;
+    @include breakpoint(xxl,min)
+    {
+        padding: 20px 80px;
+    }
+
+    .nav a
+    {
+        color: $white;
+
+        &:hover
+        {
+            color: $teal;
+        }
+    }
+    
+}
+
+
+
+.apply-now-button a
+{
+    border:solid 3px $teal;
+    text-decoration: none;
+    color: $white;   
+    &:hover
+    {
+        color: $teal;
+    } 
+
+&:visited{color: $teal;}
+}
+
+.bg-teal
+{
+    background:$lightteal;
+}
+
+.justifiednav{
+
+    font-family: "roboto";
+    font-weight: normal;
+     a{color: #404040; font-weight: bold;}
+    .active{color:#C67A3D !important;}
+
+@include breakpoint(md, min) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+    
+}
+
+.dropdown
+{
+    transition: 0.5s;
+
+    a{color: #fff;}
+
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+    background: $teal;
+    
+
+    & a:hover
+    {
+        background: $darkgreen;
+        color: #fff;;
+    }
+ }
+
+ .slider-container
+ {
+    position: relative;
+
+    .slider
+    {
+        .slide
+        {
+            position: relative;
+            
+            
+
+            .svgline
+            {
+                position: absolute;
+                background: url(../images/line.svg) no-repeat center center;
+                background-size:cover;
+                width: 628px;
+                height: 168px;
+                z-index: 999;
+                top:calc(100% - 300px);
+                left: calc(50% - 314px);
+                text-align: center;
+
+                @include breakpoint(md, max)
+                {
+                    display: none;
+                }
+
+                h2
+                {
+                    font-family: "roboto";
+                    font-weight: bold;
+                    font-size: 2em;
+                    color: #fff;
+                    text-transform: uppercase;
+
+                    span
+                    {
+                        color: $teal;
+                    }
+                }
+
+
+                p{font-family: "teko";
+                 font-size: 22px;
+                 font-weight: bold;
+                 color:#fff;
+                }
+                
+                
+            }
+        }
+    }
+}
+ .navcontrol{
+    position: absolute; 
+    z-index: 990;
+     display: flex;
+     top:calc(100% - 35px);
+     width: 100%;
+     & > div
+     {
+        cursor: pointer;
+     }
+    }
+
+    .navcont
+    {
+    position: absolute; 
+    z-index: 998;
+    width: 200px;
+    margin: 0 calc(50% - 100px);
+    height: 10px;
+    top:calc(100% - 30px);
+    display: flex;
+    justify-content: space-evenly;
+
+    @include breakpoint(md, max)
+    {
+        width: 100px;
+        margin: 0 calc(50% - 50px);
+    }
+
+    & > div
+    {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba($teal, 0.5);
+        cursor: pointer;
+    }
+    
+    .tns-nav-active
+    {
+        background:white;
+    }
+
+    }
+
+   
+
+    .news_parent {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+       
+      }
+      
+      .news_row {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+
+        @include breakpoint(md, mx)
+        {
+            flex-direction: column;
+        }
+
+
+        & > div:nth-child(1)
+        {
+            flex-basis: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            & > h2
+            {
+                transform: rotate(-90deg);
+                vertical-align: middle;
+                font-family: "teko";
+                font-weight: bold;
+                
+
+                @include breakpoint(md, mx)
+                {
+                    transform: rotate(0deg);
+                    text-align: center;
+                    padding:20px 0;
+                }
+            }
+        }
+
+        & > div:nth-child(2)
+        {
+            flex:6;            
+        }
+
+      }
+
+      .bg-lightgreen
+      {
+        background:$lightgreen;
+      }
+
+      .bg-lightteal
+      {
+        background:#DCB290;
+      }
+
+      .bg-darkteal
+      {
+        background:$teal;
+      }
+
+      .bg-darkgreen
+      {
+        background:$darkgreen;
+      }
+
+      .text-dark
+      {
+        color: $darkgreen !important;
+      }
+
+      .events_vertical
+      {
+        & > div
+        {
+            display: flex;
+            flex-direction: row;
+            padding-top:20px;
+            
+
+            & > div:nth-child(1)
+            {
+                flex-shrink: 100px;
+                margin-right: 20px;
+             
+
+                &  > div
+                {
+                    
+                    padding: 10px 30px;
+                    background: $darkgreen;
+                    color: $white;
+                    font-family: "teko";
+                    font-weight: bold;
+                    text-align: center;
+                    font-style: none !important;
+                    border-radius: 10px;
+                }
+
+            }
+
+            & > div:nth-child(2)
+            
+            { 
+                h4{ font-size: 16px; font-weight: bold; color: $darkgreen;}
+            }
+        }
+      }
+
+
+
+
+      .news_vertical
+      {
+      
+
+        & > div
+        {
+            display: flex;
+            flex-direction: row;
+            padding-top:20px;
+            
+
+            & > div:nth-child(1)
+            {
+                flex-shrink: 100px;
+                margin-right: 20px;
+                
+             
+
+                &  > div
+                {
+                    
+                    padding: 10px 30px;
+                    background: $white;
+                    color: black;
+                    font-family: "teko";
+                    font-weight: bold;
+                    text-align: center;
+                    font-style: none !important;
+                    border-radius: 10px;
+                }
+
+            }
+
+            & > div:nth-child(2)
+            
+            { 
+                h4{ 
+                    font-size: 16px; 
+                    font-weight: bold; 
+                    color: white; 
+                }
+
+                p
+                {
+                    color: #fff;
+                }
+            }
+        }
+      }
+
+     .texttopheading
+     {
+        
+        color: $teal;
+        font-weight: bold;
+        font-family: "roboto";
+        @include breakpoint(md, min){
+            font-size: 2em;
+     }
+    }
+
+     .textboldheading
+     {
+        font-family: "teko";
+        
+        font-weight: bold;
+        
+
+        @include breakpoint(md, min){
+        padding-left: 2em;
+        font-size: 3em;
+
+    }
+     }
+
+     .large_para
+     {
+        font-size: 1.5em;
+        color: $teal;
+     }
+
+     .great_vibes
+     {
+        font-family: "great vibes";
+        @include breakpoint(md,min )
+        {
+            font-size: 2em;
+        }
+        
+     }
+
+     .parliament_bg
+     {
+        background: url(../images/parliament.webp) no-repeat right center;
+        background-size: cover;
+     }
+
+     .btn-primary
+     {
+        background: $teal; 
+        border-radius: 0; 
+        border:none;
+
+        &:hover
+        {
+            background:$darkgreen;
+        }
+        &:visited
+        {
+            background:$darkgreen; 
+        }
+        &:active
+        {
+            background:$darkgreen;
+        }
+    }
+     
+
+    .coursebox
+    {
+        padding: 2em;
+        border:2px solid rgba(#C67A3D, 0.5);
+        min-height: 202px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        text-align: center;
+        transition: all 0.5s;
+        background:$white;
+        cursor: pointer;
+
+        h2{ font-family: "teko"; font-weight: bold; font-size: 1.5em;} 
+
+        &:hover
+        {
+            background: $darkgreen !important;
+            color: $white;
+            & > p
+            {
+                color: $white !important;
+            }
+        }
+    }
+
+
+    .institutions
+    {
+        display: flex;
+        flex-direction: column;
+        border-bottom:1px solid $lightgreen;
+        cursor: pointer;
+        transition: all,0.5s;
+
+        &:hover{background:$lightgreen;}
+
+       
+        @include breakpoint(md, min)
+        {
+            flex-direction: row;
+        }
+
+      
+
+        & > div:nth-child(1)
+        {
+          width: 10%;
+          text-align: left;
+          padding-left: 24px;
+          
+          @include breakpoint(md, max)
+          {
+            width: 100%;
+            text-align: center;
+            padding-left: 0;
+            
+          }
+        }
+
+        & > div:nth-child(2)
+        {
+           width: 40%;
+           justify-self: start;
+           align-self: center;
+           text-align: left;
+        
+
+           @include breakpoint(md, max)
+           {
+             width: 100%;
+             text-align: center;
+             
+           }
+
+           h4{font-size: bold; 
+            font-family: "roboto"; 
+            font-weight: bold;
+            font-size: 1.2em;
+            color: $darkgreen;
+        }
+        }
+
+        & > div:nth-child(3)
+        {
+           width: 60%;
+           align-self: center;
+           text-align: left;
+           @include breakpoint(md, max)
+           {
+             width: 100%;
+             text-align: center;
+             
+           }
+        }
+    }
+
+
+
+    .facilities
+    {
+        display: flex;
+        flex-direction: column;
+        border-bottom:1px solid rgba($lightgreen, 0.2);
+        cursor: pointer;
+        transition: all,0.5s;
+
+        &:hover{
+            background:rgba(#15322D,0.8);
+
+        
+        
+        }
+
+       
+        @include breakpoint(md, min)
+        {
+            flex-direction: row;
+        }
+
+      
+
+        & > div:nth-child(1)
+        {
+          width: 10%;
+          text-align: left;
+          padding-left: 24px;
+          
+          @include breakpoint(md, max)
+          {
+            width: 100%;
+            text-align: center;
+            padding-left: 0;
+            
+          }
+        }
+
+        & > div:nth-child(2)
+        {
+           width: 40%;
+           justify-self: start;
+           align-self: center;
+           text-align: left;
+        
+
+           @include breakpoint(md, max)
+           {
+             width: 100%;
+             text-align: center;
+             
+           }
+
+           h4{
+            
+            font-size: bold; 
+            font-family: "roboto"; 
+            font-weight: bold;
+            font-size: 1.2em;
+            color: $white;
+        }
+        }
+
+        & > div:nth-child(3)
+        {
+           width: 60%;
+           align-self: center;
+           text-align: left;
+
+            p{color: $white;}
+
+           @include breakpoint(md, max)
+           {
+             width: 100%;
+             text-align: center;
+             
+           }
+        }
+    }
+
+    .footer
+    {
+        h2
+        {
+            font-size: 1.5em;
+
+        }
+    }
+
+
+    .social
+    {
+        
+        a
+        {
+            margin: 0 20px;
+        }
+    }
+
+    .bottomlinks
+    {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        & > li a
+        {
+            text-decoration: none;
+            color: $white;
+            line-height: 2.5em;
+
+        }
+    }
+
+
+    .addressbox
+    {
+        background:rgba($lightgreen,.14);
+
+
+        .icon_with_text
+        {
+            display: flex;
+            flex-direction: row;
+            padding-bottom: 20px;
+            
+            
+
+            & > div:nth-child(1)
+            {
+               width: 20%;
+               align-self: center;
+            }
+
+            & > div:nth-child(2)
+            {
+               width: 80%;
+               align-self: center;
+            }
+        }
+
+
+    }
+
+    .internal_header
+    {
+        position: relative;
+        max-height: 400px;
+        width: 100%;
+
+        .titlebg
+        {
+            position: absolute;
+            width: 718px;
+            height: 100px;
+            background: url(../images/titlebg.svg) no-repeat right center;
+            top: calc(100% - 250px);
+            left: -20px;
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            @include breakpoint(md,max )
+            {
+                width: 300px;
+            }
+        }
+
+    }
+
+
+    .quicklinkbox
+    {
+        border-radius: 10px;
+        background: $darkgreen;
+
+        h2 {
+            display: block;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-family: "teko";
+            background: $teal;
+            margin:0;
+            padding:0;
+            font-size: 1.5em;
+            line-height: 2em;
+            border-radius: 10px 10px 0 0;
+        }
+
+
+        ul
+        {
+            list-style: none;
+            margin: 0;
+            padding: 20px 0;
+            
+            li
+            {
+                border-bottom: 1px solid rgba(0,0,0,0.2);
+                
+                a
+                {
+                    line-height: 2em;
+                    color: #fff;
+                    text-decoration: none;
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-left:30px;
+                }
+            }
+        }
+    }
+
+    .internal_title
+    {
+        font-family: "teko";
+        font-size: 40px;
+        color: $darkgreen;
+    }
